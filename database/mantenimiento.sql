@@ -40,12 +40,12 @@ INSERT INTO usuarios
 (nombre,email,password,rol)
 VALUES
 
-('Cesar Molina',
+('Cesar Martinez',
 'admin@empresa.com',
 'Admin123',
 'admin'),
 
-('Ana Gomez',
+('Adriana Gomez',
 'ana@empresa.com',
 'Tecnico123',
 'tecnico'),

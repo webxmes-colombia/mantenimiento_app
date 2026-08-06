@@ -11,9 +11,6 @@ class Usuario:
     """
 
     def listar(self):
-        """
-        Obtiene todos los usuarios registrados.
-        """
 
         conexion = conectar()
 
@@ -27,20 +24,40 @@ class Usuario:
                 rol,
                 creado_en
             FROM usuarios
-            ORDER BY id;
+            ORDER BY id
         """)
 
         usuarios = cursor.fetchall()
 
         cursor.close()
-
         conexion.close()
 
         return usuarios
-    
+
+
     def contar_tecnicos(self):
+
+        conexion = conectar()
+
+        cursor = conexion.cursor(dictionary=True)
+
+        cursor.execute("""
+            SELECT COUNT(*) AS total
+            FROM usuarios
+            WHERE rol='tecnico'
+        """)
+
+        resultado = cursor.fetchone()
+
+        cursor.close()
+        conexion.close()
+
+        return resultado["total"]
+
+
+    def login(self, email):
         """
-        Retorna la cantidad de técnicos registrados.
+        Buscar un usuario por email.
         """
 
         conexion = conectar()
@@ -48,25 +65,14 @@ class Usuario:
         cursor = conexion.cursor(dictionary=True)
 
         cursor.execute("""
-
-            SELECT COUNT(*) AS total
-
+            SELECT *
             FROM usuarios
+            WHERE email=%s
+        """, (email,))
 
-            WHERE rol='tecnico'
-
-        """)
-
-        resultado = cursor.fetchone()
+        usuario = cursor.fetchone()
 
         cursor.close()
-
         conexion.close()
 
-        return resultado["total"]
-    
-    
-    
-    
-    
-    
+        return usuario

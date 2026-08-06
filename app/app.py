@@ -2,6 +2,7 @@ from flask import Flask
 
 from app.routes.usuario_routes import usuario_bp
 from app.routes.dashboard_routes import dashboard_bp
+from app.routes.auth_routes import auth_bp
 
 # app = Flask(__name__)
 app = Flask(
@@ -14,6 +15,7 @@ app.secret_key = "123456"
 
 app.register_blueprint(usuario_bp)
 app.register_blueprint(dashboard_bp)
+app.register_blueprint(auth_bp)
 
 if __name__ == "__main__":
 

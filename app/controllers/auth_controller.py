@@ -1,33 +1,62 @@
+# ============================================
+# CONTROLADOR DE AUTENTICACIÓN
+# ============================================
+
 from flask import render_template
 from flask import request
 from flask import redirect
 from flask import session
+from flask import flash
+
+from werkzeug.security import check_password_hash
 
 from app.models.usuario import Usuario
 
-usuario_model = Usuario()
+
+class AuthController:
+
+    def __init__(self):
+
+        self.usuario = Usuario()
 
 
-def login():
+    def login(self):
+        """
+        Iniciar sesión.
+        """
 
-    if request.method == "POST":
+        if request.method == "POST":
 
-        email = request.form["email"]
+            email = request.form["email"]
 
-        password = request.form["password"]
+            password = request.form["password"]
 
-        usuario = usuario_model.login(email, password)
+            usuario = self.usuario.login(email)
 
-        if usuario:
+            if usuario:
 
-            session["usuario"] = usuario["nombre"]
-            session["rol"] = usuario["rol"]
+                if check_password_hash(
+                        usuario["password"],
+                        password):
 
-            return redirect("/dashboard")
+                    session["id"] = usuario["id"]
 
-        return render_template(
-            "auth/login.html",
-            error="Usuario o contraseña incorrectos"
-        )
+                    session["usuario"] = usuario["nombre"]
 
-    return render_template("auth/login.html")
+                    session["rol"] = usuario["rol"]
+
+                    return redirect("/dashboard")
+
+            flash(
+                "Correo o contraseña incorrectos.",
+                "danger"
+            )
+
+        return render_template("auth/login.html")
+
+
+    def logout(self):
+
+        session.clear()
+
+        return redirect("/")

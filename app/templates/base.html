@@ -53,93 +53,78 @@
 
         <hr>
 
-        <ul>
+       <ul class="nav flex-column">
 
-            <li>
+    <li class="nav-item">
+        <a class="nav-link text-white" href="/dashboard">
+            <i class="bi bi-speedometer2"></i>
+            Dashboard
+        </a>
+    </li>
 
-                <a href="#">
+    {% if session.get("rol") == "admin" %}
 
-                    <i class="bi bi-speedometer2"></i>
+    <li class="nav-item">
+        <a class="nav-link text-white" href="/usuarios">
+            <i class="bi bi-person-fill"></i>
+            Usuarios
+        </a>
+    </li>
 
-                    Dashboard
+    {% endif %}
 
-                </a>
+    <li class="nav-item">
+        <a class="nav-link text-white" href="/clientes">
+            <i class="bi bi-people-fill"></i>
+            Clientes
+        </a>
+    </li>
 
-            </li>
+    <li class="nav-item">
+        <a class="nav-link text-white" href="/equipos">
+            <i class="bi bi-pc-display"></i>
+            Equipos
+        </a>
+    </li>
 
-            <li>
+    <li class="nav-item">
+        <a class="nav-link text-white" href="/mantenimientos">
+            <i class="bi bi-tools"></i>
+            Mantenimientos
+        </a>
+    </li>
 
-                <a href="#">
+    {% if session.get("rol") == "admin" %}
 
-                    <i class="bi bi-people-fill"></i>
+    <li class="nav-item">
+        <a class="nav-link text-white" href="/auditoria">
+            <i class="bi bi-clock-history"></i>
+            Auditoría
+        </a>
+    </li>
 
-                    Clientes
+    {% endif %}
 
-                </a>
+    <li class="nav-item">
+        <a class="nav-link text-white" href="/reportes">
+            <i class="bi bi-file-earmark-pdf"></i>
+            Reportes
+        </a>
+    </li>
 
-            </li>
+    <li class="nav-item mt-5">
 
-            <li>
+        <a class="nav-link text-danger" href="/logout">
 
-                <a href="#">
+            <i class="bi bi-box-arrow-right"></i>
 
-                    <i class="bi bi-pc-display"></i>
+            Cerrar Sesión
 
-                    Equipos
+        </a>
 
-                </a>
+    </li>
 
-            </li>
-
-            <li>
-
-                <a href="#">
-
-                    <i class="bi bi-tools"></i>
-
-                    Mantenimientos
-
-                </a>
-
-            </li>
-
-            <li>
-
-                <a href="#">
-
-                    <i class="bi bi-clipboard-data"></i>
-
-                    Reportes
-
-                </a>
-
-            </li>
-
-            <li>
-
-                <a href="#">
-
-                    <i class="bi bi-clock-history"></i>
-
-                    Auditoría
-
-                </a>
-
-            </li>
-
-            <li>
-
-                <a href="#">
-
-                    <i class="bi bi-box-arrow-right"></i>
-
-                    Cerrar sesión
-
-                </a>
-
-            </li>
-
-        </ul>
+</ul>
 
     </aside>
 
@@ -152,19 +137,37 @@
         <!-- HEADER -->
 
         <header class="topbar">
+<div class="d-flex justify-content-between align-items-center">
 
-            <h2>
+    <div>
 
-                Sistema Control Mantenimiento
+        <h3 class="mb-0">
 
-                <span class="version">
+            Sistema Control Mantenimiento
 
-                    v2.0
+            <span class="badge bg-primary">
 
-                </span>
+                v2.0
 
-            </h2>
+            </span>
 
+        </h3>
+
+    </div>
+
+    <div>
+
+        <i class="bi bi-person-circle"></i>
+
+        {{ session.get("usuario","Invitado") }}
+
+        {{ session["usuario"] }}
+
+    </div>
+
+</div>
+
+        
         </header>
 
         <!-- CONTENIDO DINÁMICO -->
