@@ -37,3 +37,36 @@ class Usuario:
         conexion.close()
 
         return usuarios
+    
+    def contar_tecnicos(self):
+        """
+        Retorna la cantidad de técnicos registrados.
+        """
+
+        conexion = conectar()
+
+        cursor = conexion.cursor(dictionary=True)
+
+        cursor.execute("""
+
+            SELECT COUNT(*) AS total
+
+            FROM usuarios
+
+            WHERE rol='tecnico'
+
+        """)
+
+        resultado = cursor.fetchone()
+
+        cursor.close()
+
+        conexion.close()
+
+        return resultado["total"]
+    
+    
+    
+    
+    
+    

@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Dashboard
+{% endblock %}
+
+{% block contenido %}
+
+<div class="container-fluid">
+
+    <div class="row mb-4">
+
+        <div class="col">
+
+            <h2 class="fw-bold">
+                Dashboard
+            </h2>
+
+            <p class="text-muted">
+                Bienvenido al Sistema Control Mantenimiento v2.0
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- TARJETAS -->
+
+    <div class="row">
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow-sm border-primary">
+
+                <div class="card-body text-center">
+
+                    <h5 class="card-title">
+
+                        <i class="bi bi-people-fill"></i>
+
+                        Clientes
+
+                    </h5>
+
+                    <h2>
+
+                        {{ datos.total_clientes }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow-sm border-success">
+
+                <div class="card-body text-center">
+
+                    <h5>
+
+                        <i class="bi bi-pc-display"></i>
+
+                        Equipos
+
+                    </h5>
+
+                    <h2>
+
+                        {{ datos.total_equipos }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow-sm border-warning">
+
+                <div class="card-body text-center">
+
+                    <h5>
+
+                        <i class="bi bi-tools"></i>
+
+                        Mantenimientos
+
+                    </h5>
+
+                    <h2>
+
+                        {{ datos.total_mantenimientos }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow-sm border-info">
+
+                <div class="card-body text-center">
+
+                    <h5>
+
+                        <i class="bi bi-person-workspace"></i>
+
+                        Técnicos
+
+                    </h5>
+
+                    <h2>
+
+                        {{ datos.total_tecnicos }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- TABLAS -->
+
+    <div class="row mt-4">
+
+        <!-- CLIENTES -->
+
+        <div class="col-md-6">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header">
+
+                    Últimos Clientes
+
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-hover">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Nombre</th>
+
+                                <th>Empresa</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                        {% for cliente in datos.ultimos_clientes %}
+
+                            <tr>
+
+                                <td>
+
+                                    {{ cliente.nombre }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ cliente.empresa }}
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- EQUIPOS -->
+
+        <div class="col-md-6">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header">
+
+                    Últimos Equipos
+
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-hover">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Cliente</th>
+
+                                <th>Marca</th>
+
+                                <th>Modelo</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                        {% for equipo in datos.ultimos_equipos %}
+
+                            <tr>
+
+                                <td>
+
+                                    {{ equipo.cliente }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ equipo.marca }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ equipo.modelo }}
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,6 +1,7 @@
 from flask import Flask
 
 from app.routes.usuario_routes import usuario_bp
+from app.routes.dashboard_routes import dashboard_bp
 
 # app = Flask(__name__)
 app = Flask(
@@ -12,6 +13,7 @@ app = Flask(
 app.secret_key = "123456"
 
 app.register_blueprint(usuario_bp)
+app.register_blueprint(dashboard_bp)
 
 if __name__ == "__main__":
 
