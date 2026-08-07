@@ -1,102 +1,17 @@
 {% extends "base.html" %}
-
-{% block titulo %}
-Cliente
-{% endblock %}
-
+{% block titulo %}Cliente{% endblock %}
 {% block contenido %}
-
-<h2>{{ titulo }}</h2>
-
-{% if cliente %}
-
-<form action="/clientes/actualizar/{{ cliente.id }}" method="POST">
-
-{% else %}
-
-<form action="/clientes/guardar" method="POST">
-
-{% endif %}
-
-    <div class="mb-3">
-
-        <label>Nombre</label>
-
-        <input
-            type="text"
-            name="nombre"
-            class="form-control"
-            value="{{ cliente.nombre if cliente else '' }}"
-            required>
-
-    </div>
-
-    <div class="mb-3">
-
-        <label>Empresa</label>
-
-        <input
-            type="text"
-            name="empresa"
-            class="form-control"
-            value="{{ cliente.empresa if cliente else '' }}"
-            required>
-
-    </div>
-
-    <div class="mb-3">
-
-        <label>Dirección</label>
-
-        <input
-            type="text"
-            name="direccion"
-            class="form-control"
-            value="{{ cliente.direccion if cliente else '' }}"
-            required>
-
-    </div>
-
-    <div class="mb-3">
-
-        <label>Teléfono</label>
-
-        <input
-            type="text"
-            name="telefono"
-            class="form-control"
-            value="{{ cliente.telefono if cliente else '' }}"
-            required>
-
-    </div>
-
-    <div class="mb-3">
-
-        <label>Correo</label>
-
-        <input
-            type="email"
-            name="email"
-            class="form-control"
-            value="{{ cliente.email if cliente else '' }}"
-            required>
-
-    </div>
-
-    <button
-        class="btn btn-success">
-
-        Guardar
-
-    </button>
-
-    <a href="/clientes"
-       class="btn btn-secondary">
-
-        Cancelar
-
-    </a>
-
+<h2>{{ 'Editar cliente' if cliente else 'Nuevo cliente' }}</h2>
+<form action="{{ '/clientes/actualizar/' ~ cliente.id if cliente else '/clientes/guardar' }}" method="POST">
+  <div class="row">
+    <div class="col-md-6 mb-3"><label>Nombre o razón social</label><input class="form-control" name="nombre" value="{{ cliente.nombre if cliente else '' }}" required></div>
+    <div class="col-md-6 mb-3"><label>NIT</label><input class="form-control" name="nit" value="{{ cliente.nit if cliente else '' }}" required></div>
+    <div class="col-md-6 mb-3"><label>Contacto</label><input class="form-control" name="contacto" value="{{ cliente.contacto if cliente else '' }}" required></div>
+    <div class="col-md-6 mb-3"><label>Teléfono</label><input class="form-control" name="telefono" value="{{ cliente.telefono if cliente else '' }}"></div>
+    <div class="col-md-6 mb-3"><label>Correo</label><input type="email" class="form-control" name="correo" value="{{ cliente.correo if cliente else '' }}"></div>
+    <div class="col-md-6 mb-3"><label>Ciudad</label><input class="form-control" name="ciudad" value="{{ cliente.ciudad if cliente else '' }}"></div>
+    <div class="col-12 mb-3"><label>Dirección</label><input class="form-control" name="direccion" value="{{ cliente.direccion if cliente else '' }}"></div>
+  </div>
+  <button class="btn btn-success">Guardar</button> <a href="/clientes" class="btn btn-secondary">Cancelar</a>
 </form>
-
 {% endblock %}

@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block titulo %}Mantenimientos{% endblock %}
+{% block contenido %}
+<h2>Mantenimientos</h2><a href="/mantenimientos/nuevo" class="btn btn-primary mb-3">Nuevo mantenimiento</a>
+<table class="table table-bordered"><thead><tr><th>Cliente</th><th>Equipo</th><th>Técnico</th><th>Tipo</th><th>Fecha</th><th>Estado</th></tr></thead><tbody>{% for m in mantenimientos %}<tr><td>{{ m.cliente }}</td><td>{{ m.equipo }}</td><td>{{ m.tecnico }}</td><td>{{ m.tipo_mantenimiento }}</td><td>{{ m.fecha_mantenimiento }}</td><td>{{ m.estado }}</td></tr>{% endfor %}</tbody></table>
+{% endblock %}

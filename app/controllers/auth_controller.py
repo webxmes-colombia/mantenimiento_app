@@ -27,16 +27,16 @@ class AuthController:
 
         if request.method == "POST":
 
-            email = request.form["email"]
+            correo = request.form["email"]
 
             password = request.form["password"]
 
-            usuario = self.usuario.login(email)
+            usuario = self.usuario.login(correo)
 
             if usuario:
 
                 if check_password_hash(
-                        usuario["password"],
+                        usuario["password_hash"],
                         password):
 
                     session["id"] = usuario["id"]

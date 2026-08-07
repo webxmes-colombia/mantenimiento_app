@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block titulo %}Equipo{% endblock %}
+{% block contenido %}
+<h2>{{ 'Editar equipo' if equipo else 'Nuevo equipo' }}</h2>
+<form action="{{ '/equipos/actualizar/' ~ equipo.id if equipo else '/equipos/guardar' }}" method="POST"><div class="row">
+<div class="col-md-6 mb-3"><label>Cliente</label><select name="cliente_id" class="form-select" required>{% for cliente in clientes %}<option value="{{ cliente.id }}" {% if equipo and equipo.cliente_id == cliente.id %}selected{% endif %}>{{ cliente.nombre }}</option>{% endfor %}</select></div>
+{% for campo, etiqueta, requerido in [('tipo','Tipo',true),('marca','Marca',true),('modelo','Modelo',true),('serial','Serial',true),('activo_fijo','Activo fijo',false),('nombre_equipo','Nombre del equipo',true),('ubicacion','Ubicación',true),('direccion_ip','Dirección IP',false),('procesador','Procesador',false),('ram','RAM',false),('tipo_ram','Tipo de RAM',false),('disco','Disco',false),('sistema_operativo','Sistema operativo',false)] %}<div class="col-md-6 mb-3"><label>{{ etiqueta }}</label><input class="form-control" name="{{ campo }}" value="{{ equipo[campo] if equipo else '' }}" {% if requerido %}required{% endif %}></div>{% endfor %}
+<div class="col-md-4 mb-3"><label>Tipo de disco</label><select name="tipo_disco" class="form-select">{% for valor in ['HDD','SSD','NVMe','eMMC','Hibrido','No aplica'] %}<option value="{{ valor }}" {% if equipo and equipo.tipo_disco == valor %}selected{% endif %}>{{ valor }}</option>{% endfor %}</select></div>
+<div class="col-md-4 mb-3"><label>Antivirus</label><select name="antivirus" class="form-select">{% for valor in ['Windows Defender','ESET','Kaspersky','Avast','McAfee','Ninguno','Otro'] %}<option value="{{ valor }}" {% if equipo and equipo.antivirus == valor %}selected{% endif %}>{{ valor }}</option>{% endfor %}</select></div>
+<div class="col-md-4 mb-3"><label>Estado</label><select name="estado" class="form-select">{% for valor in ['Operativo','En mantenimiento','Fuera de servicio','En reparación','Baja'] %}<option value="{{ valor }}" {% if equipo and equipo.estado == valor %}selected{% endif %}>{{ valor }}</option>{% endfor %}</select></div>
+<div class="col-md-6 mb-3"><label>Fecha de ingreso</label><input type="date" name="fecha_ingreso" class="form-control" value="{{ equipo.fecha_ingreso if equipo else '' }}" required></div>
+<div class="col-md-6 mb-3"><label>Activo</label><select name="activo" class="form-select">{% for valor in ['SI','NO'] %}<option value="{{ valor }}" {% if equipo and equipo.activo == valor %}selected{% endif %}>{{ valor }}</option>{% endfor %}</select></div>
+<div class="col-12 mb-3"><label>Accesorios</label><textarea name="accesorios" class="form-control">{{ equipo.accesorios if equipo else '' }}</textarea></div><div class="col-12 mb-3"><label>Observaciones</label><textarea name="observaciones" class="form-control">{{ equipo.observaciones if equipo else '' }}</textarea></div>
+</div><button class="btn btn-success">Guardar</button> <a href="/equipos" class="btn btn-secondary">Cancelar</a></form>
+{% endblock %}

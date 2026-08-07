@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block titulo %}Equipos{% endblock %}
+{% block contenido %}
+<h2>Equipos</h2><a href="/equipos/nuevo" class="btn btn-primary mb-3">Nuevo equipo</a>
+<table class="table table-bordered table-hover"><thead><tr><th>Cliente</th><th>Nombre</th><th>Marca / modelo</th><th>Serial</th><th>Ubicación</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>{% for equipo in equipos %}<tr><td>{{ equipo.cliente }}</td><td>{{ equipo.nombre_equipo }}</td><td>{{ equipo.marca }} {{ equipo.modelo }}</td><td>{{ equipo.serial }}</td><td>{{ equipo.ubicacion }}</td><td>{{ equipo.estado }}</td><td><a href="/equipos/editar/{{ equipo.id }}" class="btn btn-warning btn-sm">Editar</a> <a href="/equipos/eliminar/{{ equipo.id }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Dar de baja este equipo?')">Dar de baja</a></td></tr>{% endfor %}</tbody></table>
+{% endblock %}
