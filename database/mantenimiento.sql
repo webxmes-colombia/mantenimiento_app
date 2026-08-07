@@ -42,12 +42,12 @@ VALUES
 
 ('Cesar Martinez',
 'admin@empresa.com',
-'Admin123',
+'scrypt:32768:8:1$C5TOPxqNXD5rGbIL$443bb11d941697e17337af318c6acfb97c519719a5fd5d5203e2203c6e549745cdd08945dff0da7d6bcc96cbee084cba80800facb3489f259d3ca02162923428',
 'admin'),
 
 ('Adriana Gomez',
 'ana@empresa.com',
-'Tecnico123',
+'scrypt:32768:8:1$95PTWKoiSjwiVMkb$3d2ffad33fedb97c0d8ace2c399c8469725b00512fce083b11926d6ecf49de8581942427cb9097259682fbd99cdb0afa53043dd901874eebea6c0a33ee32e272',
 'tecnico'),
 
 ('Luis Martinez',
