@@ -112,18 +112,40 @@ CREATE TABLE mantenimientos (
 
 -- Fotografias, facturas o documentos asociados a un mantenimiento
 CREATE TABLE evidencias (
+
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+
     mantenimiento_id INT UNSIGNED NOT NULL,
+
+    tipo_evidencia ENUM(
+        'ANTES',
+        'DURANTE',
+        'DESPUES'
+    ) NOT NULL,
+
     nombre_archivo VARCHAR(255) NOT NULL,
+
     ruta_archivo VARCHAR(500) NOT NULL,
+
     tipo_archivo VARCHAR(100),
+
     descripcion VARCHAR(500),
+
     fecha_carga DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
     CONSTRAINT fk_evidencias_mantenimiento
-        FOREIGN KEY (mantenimiento_id) REFERENCES mantenimientos(id)
-        ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY (mantenimiento_id)
+        REFERENCES mantenimientos(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+
     INDEX idx_evidencias_mantenimiento (mantenimiento_id)
+
 ) ENGINE=InnoDB;
+
+
+
+
 
 -- Trazabilidad de las acciones realizadas en la aplicacion
 CREATE TABLE auditoria (
@@ -147,7 +169,7 @@ CREATE TABLE auditoria (
 -- Datos iniciales
 -- ----------------------------------------------------------------
 INSERT INTO usuarios (id, nombre, correo, password_hash, rol, activo) VALUES
-    (1, 'Cesar Martinez', 'admin@empresa.com', 'scrypt:32768:8:1$C5TOPxqNXD5rGbIL$443bb11d941697e17337af318c6acfb97c519719a5fd5d5203e2203c6e549745cdd08945dff0da7d6bcc96cbee084cba80800facb3489f259d3ca02162923428', 'Administrador', 1),
+    (1, 'Cesar A Martinez', 'admin@empresa.com', 'scrypt:32768:8:1$C5TOPxqNXD5rGbIL$443bb11d941697e17337af318c6acfb97c519719a5fd5d5203e2203c6e549745cdd08945dff0da7d6bcc96cbee084cba80800facb3489f259d3ca02162923428', 'Administrador', 1),
     (2, 'Carlos Ramirez', 'carlos.ramirez@mantenimiento.local', '$2b$12$OqnyNmfV8hN2yfnycp1p7ewhgBfYHEEBP/T1EE7SdyWgSvMO4zmfC', 'Tecnico', 1),
     (3, 'Laura Gomez', 'laura.gomez@mantenimiento.local', '$2b$12$OqnyNmfV8hN2yfnycp1p7ewhgBfYHEEBP/T1EE7SdyWgSvMO4zmfC', 'Tecnico', 1),
     (4, 'Miguel angel Ruiz', 'miguel.ruiz@mantenimiento.local', '$2b$12$OqnyNmfV8hN2yfnycp1p7ewhgBfYHEEBP/T1EE7SdyWgSvMO4zmfC', 'Tecnico', 1),

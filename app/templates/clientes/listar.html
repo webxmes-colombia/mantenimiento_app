@@ -3,5 +3,5 @@
 {% block contenido %}
 <h2>Clientes</h2><a href="/clientes/nuevo" class="btn btn-primary mb-3">Nuevo cliente</a>
 <table class="table table-bordered table-hover"><thead><tr><th>Nombre</th><th>NIT</th><th>Contacto</th><th>Teléfono</th><th>Correo</th><th>Acciones</th></tr></thead>
-<tbody>{% for cliente in clientes %}<tr><td>{{ cliente.nombre }}</td><td>{{ cliente.nit }}</td><td>{{ cliente.contacto }}</td><td>{{ cliente.telefono or '' }}</td><td>{{ cliente.correo or '' }}</td><td><a href="/clientes/editar/{{ cliente.id }}" class="btn btn-warning btn-sm">Editar</a> <a href="/clientes/eliminar/{{ cliente.id }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Desactivar este cliente?')">Desactivar</a></td></tr>{% endfor %}</tbody></table>
+<tbody>{% for cliente in clientes %}<tr><td>{{ cliente.nombre }}</td><td>{{ cliente.nit }}</td><td>{{ cliente.contacto }}</td><td>{{ cliente.telefono or '' }}</td><td>{{ cliente.correo or '' }}</td><td><a href="/clientes/editar/{{ cliente.id }}" class="btn btn-warning btn-sm">Editar</a> <a href="/clientes/eliminar/{{ cliente.id }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Desactivar este cliente?')">Eliminar</a></td></tr>{% endfor %}</tbody></table>
 {% endblock %}

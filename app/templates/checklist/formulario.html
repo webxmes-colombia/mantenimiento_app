@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Checklist de Verificación
+{% endblock %}
+
+{% block contenido %}
+
+<h2>Checklist de Verificación</h2>
+
+<form method="GET">
+
+    <div class="mb-3">
+
+        <label>Seleccionar equipo</label>
+
+        <select
+            name="equipo"
+            class="form-select"
+            onchange="if(this.value) window.location='/checklist/equipo/' + this.value">
+
+            <option value="">Seleccione un equipo</option>
+
+            {% for e in equipos %}
+
+            <option
+                value="{{ e.id }}"
+                {% if equipo and equipo.id == e.id %}selected{% endif %}>
+
+                {{ e.nombre_equipo }} -
+                {{ e.marca }} {{ e.modelo }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+</form>
+
+
+{% if equipo %}
+
+<hr>
+
+<h4>Datos del equipo</h4>
+
+<table class="table table-bordered">
+
+    <tr>
+        <th>Equipo</th>
+        <td>{{ equipo.nombre_equipo }}</td>
+    </tr>
+
+    <tr>
+        <th>Marca</th>
+        <td>{{ equipo.marca }}</td>
+    </tr>
+
+    <tr>
+        <th>Modelo</th>
+        <td>{{ equipo.modelo }}</td>
+    </tr>
+
+    <tr>
+        <th>Serial</th>
+        <td>{{ equipo.serial }}</td>
+    </tr>
+
+    <tr>
+        <th>Activo fijo</th>
+        <td>{{ equipo.activo_fijo }}</td>
+    </tr>
+
+</table>
+
+
+<h4>Verificación</h4>
+
+<div class="form-check">
+    <input class="form-check-input" type="checkbox">
+    <label class="form-check-label">
+        Equipo enciende correctamente
+    </label>
+</div>
+
+<div class="form-check">
+    <input class="form-check-input" type="checkbox">
+    <label class="form-check-label">
+        Sistema operativo inicia correctamente
+    </label>
+</div>
+
+<div class="form-check">
+    <input class="form-check-input" type="checkbox">
+    <label class="form-check-label">
+        Teclado funciona correctamente
+    </label>
+</div>
+
+<div class="form-check">
+    <input class="form-check-input" type="checkbox">
+    <label class="form-check-label">
+        Mouse funciona correctamente
+    </label>
+</div>
+
+<div class="form-check">
+    <input class="form-check-input" type="checkbox">
+    <label class="form-check-label">
+        Pantalla funciona correctamente
+    </label>
+</div>
+
+<div class="form-check">
+    <input class="form-check-input" type="checkbox">
+    <label class="form-check-label">
+        Puertos USB funcionan
+    </label>
+</div>
+
+<div class="form-check">
+    <input class="form-check-input" type="checkbox">
+    <label class="form-check-label">
+        Red / Internet funciona
+    </label>
+</div>
+
+<div class="form-check">
+    <input class="form-check-input" type="checkbox">
+    <label class="form-check-label">
+        Audio funciona
+    </label>
+</div>
+
+<div class="form-check">
+    <input class="form-check-input" type="checkbox">
+    <label class="form-check-label">
+        Antivirus actualizado
+    </label>
+</div>
+
+<div class="form-check">
+    <input class="form-check-input" type="checkbox">
+    <label class="form-check-label">
+        Windows actualizado
+    </label>
+</div>
+
+<div class="form-check">
+    <input class="form-check-input" type="checkbox">
+    <label class="form-check-label">
+        Drivers actualizados
+    </label>
+</div>
+
+<div class="form-check">
+    <input class="form-check-input" type="checkbox">
+    <label class="form-check-label">
+        Temperaturas normales
+    </label>
+</div>
+
+<div class="form-check">
+    <input class="form-check-input" type="checkbox">
+    <label class="form-check-label">
+        Disco sin errores
+    </label>
+</div>
+
+<div class="form-check">
+    <input class="form-check-input" type="checkbox">
+    <label class="form-check-label">
+        Limpieza interna realizada
+    </label>
+</div>
+
+<div class="form-check">
+    <input class="form-check-input" type="checkbox">
+    <label class="form-check-label">
+        Equipo correctamente ensamblado
+    </label>
+</div>
+
+
+<div class="mb-3 mt-4">
+
+    <label>Observaciones</label>
+
+    <textarea
+        class="form-control"
+        rows="4"></textarea>
+
+</div>
+
+
+<div class="mb-3">
+
+    <label>Resultado</label>
+
+    <select class="form-select">
+
+        <option>APROBADO</option>
+
+        <option>PENDIENTE</option>
+
+        <option>REQUIERE REVISION</option>
+
+    </select>
+
+</div>
+
+
+<button
+    type="button"
+    onclick="window.print()"
+    class="btn btn-primary">
+
+    Imprimir
+
+</button>
+
+{% endif %}
+
+{% endblock %}

@@ -19,7 +19,6 @@ class AuthController:
 
         self.usuario = Usuario()
 
-
     def login(self):
         """
         Iniciar sesión.
@@ -28,6 +27,7 @@ class AuthController:
         if request.method == "POST":
 
             correo = request.form["email"]
+            
 
             password = request.form["password"]
 
@@ -53,7 +53,6 @@ class AuthController:
             )
 
         return render_template("auth/login.html")
-
 
     def logout(self):
 

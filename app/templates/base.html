@@ -2,7 +2,9 @@
 <html lang="es">
 
 <head>
-
+<link rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='img/favicon.ico') }}">
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -106,10 +108,15 @@
     {% endif %}
 
     <li class="nav-item">
-        <a class="nav-link text-white" href="/reportes">
-            <i class="bi bi-file-earmark-pdf"></i>
-            Reportes
-        </a>
+       <a class="nav-link text-white" href="/reportes/equipos">
+    <i class="bi bi-pc-display"></i>
+    Reporte por equipo
+</a>
+    </li>    <li class="nav-item">
+       <a class="nav-link text-white" href="/checklist">
+    <i class="bi bi-pc-display"></i>
+    Checklist
+</a>
     </li>
 
     <li class="nav-item mt-5">

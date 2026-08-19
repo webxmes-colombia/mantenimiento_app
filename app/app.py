@@ -6,6 +6,8 @@ from app.routes.auth_routes import auth_bp
 from app.routes.cliente_routes import cliente_bp
 from app.routes.equipo_routes import equipo_bp
 from app.routes.mantenimiento_routes import mantenimiento_bp
+from app.routes.reporte_routes import reporte_bp
+from app.routes.checklist_routes import checklist_bp
 
 # app = Flask(__name__)
 app = Flask(
@@ -22,6 +24,8 @@ app.register_blueprint(auth_bp)
 app.register_blueprint(cliente_bp)
 app.register_blueprint(equipo_bp)
 app.register_blueprint(mantenimiento_bp)
+app.register_blueprint(reporte_bp)
+app.register_blueprint(checklist_bp)
 
 if __name__ == "__main__":
 

@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Reporte por equipo
+{% endblock %}
+
+{% block contenido %}
+
+<h2>Reporte de mantenimientos por equipo</h2>
+
+<form method="GET" action="/reportes/equipos" class="row mb-4">
+
+    <div class="col-md-8">
+
+        <label class="form-label">Seleccione un equipo</label>
+
+        <select name="equipo_id" class="form-select" required>
+
+            <option value="">Seleccione...</option>
+
+            {% for equipo in equipos %}
+
+            <option
+                value="{{ equipo.id }}"
+                {% if equipo.id == equipo_id %}selected{% endif %}>
+
+                {{ equipo.nombre }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <div class="col-md-2 d-flex align-items-end">
+
+        <button class="btn btn-primary">
+            Consultar
+        </button>
+
+    </div>
+
+</form>
+
+{% if equipo_id %}
+<div class="mb-3">
+
+    <a
+        href="/reportes/equipos/pdf?equipo_id={{ equipo_id }}"
+        class="btn btn-danger">
+
+        <i class="bi bi-file-earmark-pdf"></i>
+        Descargar PDF
+
+    </a>
+
+</div>
+
+<table class="table table-bordered table-hover">
+
+    <thead class="table-dark">
+
+        <tr>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Equipo</th>
+            <th>Técnico</th>
+            <th>Tipo</th>
+            <th>Estado</th>
+            <th>Costo</th>
+            <th>Diagnóstico</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for mantenimiento in mantenimientos %}
+
+        <tr>
+            <td>{{ mantenimiento.fecha_mantenimiento }}</td>
+            <td>{{ mantenimiento.cliente }}</td>
+            <td>{{ mantenimiento.nombre_equipo }}<br>{{ mantenimiento.equipo }}</td>
+            <td>{{ mantenimiento.tecnico }}</td>
+            <td>{{ mantenimiento.tipo_mantenimiento }}</td>
+            <td>{{ mantenimiento.estado }}</td>
+            <td>${{ mantenimiento.costo }}</td>
+            <td>{{ mantenimiento.diagnostico }}</td>
+        </tr>
+
+        {% else %}
+
+        <tr>
+            <td colspan="8" class="text-center">
+                Este equipo no tiene mantenimientos registrados.
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endif %}
+
+{% endblock %}
