@@ -48,7 +48,7 @@ def admin_required(func):
 
             return redirect("/")
 
-        if session.get("rol") != "Administrador":
+        if session.get("rol") != "admin":
 
             flash(
                 "No tiene permisos para acceder.",

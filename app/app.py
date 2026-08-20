@@ -8,7 +8,8 @@ from app.routes.equipo_routes import equipo_bp
 from app.routes.mantenimiento_routes import mantenimiento_bp
 from app.routes.reporte_routes import reporte_bp
 from app.routes.checklist_routes import checklist_bp
-
+import os
+from app.routes.evidencia_routes import evidencia_bp
 # app = Flask(__name__)
 app = Flask(
     __name__,
@@ -18,6 +19,12 @@ app = Flask(
 
 app.secret_key = "123456"
 
+app.config["UPLOAD_FOLDER"] = os.path.join(
+    app.root_path,
+    "static",
+    "uploads"
+)
+
 app.register_blueprint(usuario_bp)
 app.register_blueprint(dashboard_bp)
 app.register_blueprint(auth_bp)
@@ -26,6 +33,7 @@ app.register_blueprint(equipo_bp)
 app.register_blueprint(mantenimiento_bp)
 app.register_blueprint(reporte_bp)
 app.register_blueprint(checklist_bp)
+app.register_blueprint(evidencia_bp)
 
 if __name__ == "__main__":
 

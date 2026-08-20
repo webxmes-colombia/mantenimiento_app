@@ -44,6 +44,7 @@ class AuthController:
                     session["usuario"] = usuario["nombre"]
 
                     session["rol"] = usuario["rol"]
+                    print("ROL EN SESION:", session["rol"])
 
                     return redirect("/dashboard")
 

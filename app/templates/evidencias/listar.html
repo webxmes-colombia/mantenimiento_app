@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Evidencias del Mantenimiento
+{% endblock %}
+
+{% block contenido %}
+
+<h2>Evidencias del Mantenimiento</h2>
+
+<hr>
+
+<form
+    action="/evidencias/subir/{{ mantenimiento_id }}"
+    method="POST"
+    enctype="multipart/form-data">
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Tipo de evidencia
+        </label>
+
+        <select
+            name="tipo_evidencia"
+            class="form-select"
+            required>
+
+            <option value="ANTES">
+                Antes del mantenimiento
+            </option>
+
+            <option value="DURANTE">
+                Durante el mantenimiento
+            </option>
+
+            <option value="DESPUES">
+                Después del mantenimiento
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Fotografía
+        </label>
+
+        <input
+            type="file"
+            name="archivo"
+            class="form-control"
+            accept="image/jpeg,image/png"
+            required>
+
+    </div>
+
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Descripción
+        </label>
+
+        <input
+            type="text"
+            name="descripcion"
+            class="form-control"
+            placeholder="Descripción de la evidencia">
+
+    </div>
+
+
+    <button
+        type="submit"
+        class="btn btn-primary">
+
+        Subir evidencia
+
+    </button>
+
+</form>
+
+
+<hr class="mt-4">
+
+
+<h4>Evidencias registradas</h4>
+
+
+{% if evidencias %}
+
+<div class="row">
+
+{% for evidencia in evidencias %}
+
+<div class="col-md-4 mb-4">
+
+    <div class="card">
+
+        <img
+    src="{{ url_for(
+        'static',
+        filename=evidencia.ruta_archivo
+    ) }}"
+    class="card-img-top"
+    style="height:220px; object-fit:cover;">
+
+        <div class="card-body">
+
+            <h5 class="card-title">
+
+                {{ evidencia.tipo_evidencia }}
+
+            </h5>
+
+            <p class="card-text">
+
+                {{ evidencia.descripcion }}
+
+            </p>
+
+            <small class="text-muted">
+
+                {{ evidencia.fecha_carga }}
+
+            </small>
+
+            <br><br>
+
+            <a
+                href="/evidencias/eliminar/{{ evidencia.id }}"
+                class="btn btn-danger btn-sm"
+                onclick="return confirm('¿Eliminar esta evidencia?');">
+
+                Eliminar
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% else %}
+
+<div class="alert alert-info">
+
+    No hay evidencias registradas para este mantenimiento.
+
+</div>
+
+{% endif %}
+
+
+<a
+    href="/mantenimientos"
+    class="btn btn-secondary">
+
+    Volver a Mantenimientos
+
+</a>
+
+{% endblock %}
